@@ -35,7 +35,7 @@ jobs:
 
     - name: 'Envoriment'
       env: 
-        cookies: ${{ secrets.cookies }}
+        cookies: ${{ secrets.COOKIES }}
       run: |
         pwd
         sudo chmod -R 777 ./drivers/chromedriver
