@@ -37,4 +37,6 @@ jobs:
       env: 
         cookies: ${{ secrets.cookies }}
       run: |
+        sudo cp -p ./drivers/chromedriver /usr/bin/
+        chmod -R 777 /usr/bin/chromedriver
         python SteamzgAutoCheckIn.py
