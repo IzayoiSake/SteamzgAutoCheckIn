@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import time
 import os
-
+import sys
 class SteamzgAutoCheckIn:
 
     def __init__(self, cookies = ""):
@@ -16,7 +16,12 @@ class SteamzgAutoCheckIn:
         
         
     def Initdriver(self):
-        chrome_path = "drivers\\chromedriver.exe"
+        # chenck system platform
+        if sys.platform.startswith('win'):
+            chrome_path = os.path.join("drivers", "chromedriver.exe")
+        elif sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
+            chrome_path = os.path.join("drivers", "chromedriver")
+
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--connect-timeout=10')
         # disable infobars
