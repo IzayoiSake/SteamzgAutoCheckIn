@@ -2,6 +2,6 @@
 # $ conda create --name <env> --file <this file>
 # platform: win-64
 
-bs4=4.12.2=py38hd3eb1b0_0
-selenium=3.141.0=py311h2bbff1b_1000
+bs4=4.12.2
+selenium=3.141.0
 
