@@ -2,6 +2,5 @@
 # $ conda create --name <env> --file <this file>
 # platform: win-64
 
-bs4==4.12.2
 selenium==3.141.0
 
