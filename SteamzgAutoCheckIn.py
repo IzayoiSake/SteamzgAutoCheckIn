@@ -37,11 +37,13 @@ class SteamzgAutoCheckIn:
         chrome_options.add_argument('--headless')
 
         self.driver = webdriver.Chrome(chrome_options = chrome_options, executable_path = chrome_path)
+        print("Init driver finished")
     def AddCookies(self):
         self.driver.get(self.url)
         for cookie in self.cookies.split(';'):
             name, value = cookie.strip().split('=', 1)
             self.driver.add_cookie({'name': name, 'value': value})
+        print("Add cookies finished")
     def ClickWelcomeButton(self):
         try:
             # find class="poi-dialog__footer__btn poi-dialog__footer__btn_default"
@@ -62,6 +64,7 @@ class SteamzgAutoCheckIn:
             # wait 2s
             time.sleep(2)
             checkIn.click()
+        print("CheckIn finished")
         # "白送模式"
         while True:
             self.driver.get(self.checkInUrl)
@@ -86,7 +89,7 @@ class SteamzgAutoCheckIn:
             
             if reachLimit:
                 break
-
+        print("FreeMode finished")
         # "0风险白嫖抽奖"
         while True:
             self.driver.get(self.checkInUrl)
@@ -111,7 +114,7 @@ class SteamzgAutoCheckIn:
             
             if reachLimit:
                 break
-            
+        print("ZeroRiskMode finished")
 if __name__ == "__main__":
     cookies = os.getenv("cookies")
     if cookies == None:
