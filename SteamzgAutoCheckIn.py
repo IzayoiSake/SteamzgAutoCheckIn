@@ -122,7 +122,7 @@ if __name__ == "__main__":
     if cookies == None:
         print("cookies not found")
         exit()
-    autoCheckIn = SteamzgAutoCheckIn()
+    autoCheckIn = SteamzgAutoCheckIn(cookies = cookies)
     autoCheckIn.Initdriver()
     autoCheckIn.AddCookies()
     autoCheckIn.AutoCheckIn()
