@@ -23,10 +23,10 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Checkout
-      run: actions/checkout@v3
+      run: actions/checkout@v4
 
     - name: 'Set up Python'
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
     
