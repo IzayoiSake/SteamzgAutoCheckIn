@@ -13,6 +13,7 @@ class SteamzgAutoCheckIn:
         self.url = 'https://steamzg.com'
         self.checkInUrl = 'https://steamzg.com/account/lottery'
         self.cookies = cookies
+        self.timeout = 5
         
         
     def Initdriver(self):
@@ -47,7 +48,9 @@ class SteamzgAutoCheckIn:
     def ClickWelcomeButton(self):
         try:
             # find class="poi-dialog__footer__btn poi-dialog__footer__btn_default"
-            welcomeButton = self.driver.find_element_by_class_name("poi-dialog__footer__btn_default")
+            welcomeButton = WebDriverWait(self.driver, self.timeout).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "poi-dialog__footer__btn_default"))
+            )
             welcomeButton.click()
         except WebDriverException:
             print("welcome button lost")
@@ -56,28 +59,34 @@ class SteamzgAutoCheckIn:
         self.driver.get(self.checkInUrl)
         checked = True
         try:
-            checkIn = self.driver.find_element_by_xpath('//span[@class="poi-icon__text" and text()="签到"]/ancestor::a[@class="poi-tooltip is-bottom inn-nav__point-sign-daily__btn"]')
+            checkIn = WebDriverWait(self.driver, self.timeout).until(
+                EC.presence_of_element_located((By.XPATH, '//span[@class="poi-icon__text" and text()="签到"]/ancestor::a[@class="poi-tooltip is-bottom inn-nav__point-sign-daily__btn"]'))
+            )
             checked = False
         except WebDriverException:
             print("checkIn button lost")
         if not checked:
-            # wait 2s
-            time.sleep(2)
             checkIn.click()
         print("CheckIn finished")
         # "白送模式"
         while True:
             self.driver.get(self.checkInUrl)
-            freeModeSelect = self.driver.find_element_by_xpath('//h3[contains(text(), "白送模式")]/..')
+            freeModeSelect = WebDriverWait(self.driver, self.timeout).until(
+                EC.presence_of_element_located((By.XPATH, '//h3[contains(text(), "白送模式")]/..'))
+            )
             freeModeSelect.click()
-            time.sleep(2)
-            goButton = self.driver.find_element_by_xpath('//span[@class="poi-icon__text" and text()="GO"]')
-            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", goButton)
+            goButton = WebDriverWait(self.driver, self.timeout).until(
+                EC.presence_of_element_located((By.XPATH, '//span[@class="poi-icon__text" and text()="GO"]'))
+            )
+            time.sleep(3)
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
             goButton.click()
             # Check if the times reach the limit
             reachLimit = True
-            time.sleep(2)
-            alrtMsg = self.driver.find_element_by_xpath('//div[@class="poi-alert__msg"]')
+            alrtMsg = WebDriverWait(self.driver, self.timeout).until(
+                EC.presence_of_element_located((By.XPATH, '//div[@class="poi-alert__msg"]'))
+            )
             if "达到最大抽奖次数" in alrtMsg.text:
                 reachLimit = True
             elif "恭喜你" in alrtMsg.text:
@@ -93,16 +102,22 @@ class SteamzgAutoCheckIn:
         # "0风险白嫖抽奖"
         while True:
             self.driver.get(self.checkInUrl)
-            zeroRiskModeSelect = self.driver.find_element_by_xpath('//h3[contains(text(), "0风险白嫖抽奖")]/..')
+            zeroRiskModeSelect = WebDriverWait(self.driver, self.timeout).until(
+                EC.presence_of_element_located((By.XPATH, '//h3[contains(text(), "0风险白嫖抽奖")]/..'))
+            )
             zeroRiskModeSelect.click()
-            time.sleep(2)
-            goButton = self.driver.find_element_by_xpath('//span[@class="poi-icon__text" and text()="GO"]')
-            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", goButton)
+            goButton = WebDriverWait(self.driver, self.timeout).until(
+                EC.presence_of_element_located((By.XPATH, '//span[@class="poi-icon__text" and text()="GO"]'))
+            )
+            time.sleep(3)
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
             goButton.click()
             # Check if the times reach the limit
             reachLimit = True
-            time.sleep(2)
-            alrtMsg = self.driver.find_element_by_xpath('//div[@class="poi-alert__msg"]')
+            alrtMsg = WebDriverWait(self.driver, self.timeout).until(
+                EC.presence_of_element_located((By.XPATH, '//div[@class="poi-alert__msg"]'))
+            )
             if "达到最大抽奖次数" in alrtMsg.text:
                 reachLimit = True
             elif "恭喜你" in alrtMsg.text:
