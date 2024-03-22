@@ -4,4 +4,4 @@
 
 selenium==3.141.0
 urllib3==1.26.18
-pywget==3.2
+pywget==0.31
