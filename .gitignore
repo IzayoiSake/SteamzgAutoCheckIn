@@ -161,3 +161,4 @@ cython_debug/
 
 # user defined ignored files
 cookies.txt
+account.txt
