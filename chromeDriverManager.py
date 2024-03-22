@@ -2,7 +2,6 @@ import os
 import re
 import wget
 import zipfile
-from bs4 import BeautifulSoup
 from selenium import webdriver
 
 class ChromeDriverManager:
