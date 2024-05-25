@@ -21,8 +21,7 @@ class SteamzgAutoCheckIn:
         
         
     def Initdriver(self):
-        chromeManager = ChromeDriverManager()
-        chromeDirverPath = chromeManager.checkChromeDriver()
+        
 
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--connect-timeout=10')
@@ -37,7 +36,10 @@ class SteamzgAutoCheckIn:
         chrome_options.add_argument('--hide-scrollbars')
         # chrome_options.add_argument('--headless')
 
-        self.driver = webdriver.Chrome(chrome_options = chrome_options, executable_path = chromeDirverPath)
+        # chromeManager = ChromeDriverManager()
+        # chromeDirverPath = chromeManager.checkChromeDriver()
+        # self.driver = webdriver.Chrome(chrome_options = chrome_options, executable_path = chromeDirverPath)
+        self.driver = webdriver.Chrome(chrome_options = chrome_options)
         print("Init driver finished")
 
     def AddCookies(self):

@@ -35,9 +35,12 @@ class ChromeDriverManager:
         os.remove(driverZip)
         return chromeDirverPath
     
-    def checkChromeDriver(self):
+    def checkChromeDriver(self, chromeVersion = None):
         # get current chrome version in windows
-        chrome_version = os.popen("reg query \"HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon\" /v version").read().split("REG_SZ")[1].strip().split(".")[0]
+        try:
+            chrome_version = os.popen("reg query \"HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon\" /v version").read().split("REG_SZ")[1].strip().split(".")[0]
+        except:
+            chrome_version = os.getenv("ProgramFiles(x86)" + "\\Google\\Chrome\\Application\\chrome.exe --version").read().split("Google Chrome ")[1].strip().split(".")[0]
         # # get current chromedriver version
         # chrome_path = os.path.join("drivers", "chromedriver.exe")
         # chromedriver_version = os.popen(chrome_path + " --version").read().split("ChromeDriver ")[1].strip().split(".")[0]
